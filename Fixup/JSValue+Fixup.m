@@ -141,5 +141,20 @@
                                       @"trailing":@(value.trailing),
                                       } inContext:context];
 }
++ (JSValue *)valueWithData:(NSData*)value inContext:(JSContext *)context{
+    return [JSValue valueWithObject:[[NSString alloc]initWithData:value encoding:NSISOLatin1StringEncoding] inContext:context];
+}
 
 @end
+
+
+
+
+
+
+
+
+
+
+
+

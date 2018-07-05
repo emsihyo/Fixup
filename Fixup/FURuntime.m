@@ -234,6 +234,7 @@ static bool processArgument(NSInvocation *invocation,JSValue *argument,const cha
 
 
 static JSValue * processReturn(NSInvocation *invocation,const char * returntype,JSContext *context){
+    [invocation invoke];
     JSValue *returnvalue;
     switch (returntype[0]) {
         case 'v':
@@ -440,14 +441,15 @@ JSExportAs(__property__, - (JSValue*)propertyOfValue:(JSValue*)value byPropertyn
 @end
 
 @implementation FURuntime
-
-- (instancetype)init{
+- (instancetype)initWithContext:(JSContext*)context{
     self=[super init];
-    if(!self) return nil;
+    if (!self) return nil;
+    self.context=context;
     self.caches=[NSMapTable weakToStrongObjectsMapTable];
     self.semaphore=dispatch_semaphore_create(1);
     return self;
 }
+
 
 - (JSValue*)callWithValue:(JSValue*)value withSelectorname:(NSString*)selectorname withArguments:(NSArray<JSValue *>*)arguments{
     SEL selector=NSSelectorFromString(selectorname);
@@ -456,18 +458,18 @@ JSExportAs(__property__, - (JSValue*)propertyOfValue:(JSValue*)value byPropertyn
     //class or metaclass
     Class targetclass=object_getClass(target);
    
-    if ([targetclass respondsToSelector:selector]) return [JSValue valueWithObject:nil inContext:self.context];
+    if (![targetclass respondsToSelector:selector]) return [JSValue valueWithObject:nil inContext:self.context];
     
     NSMethodSignature *signature=[target methodSignatureForSelector:selector];
     NSInvocation *invocation=[NSInvocation invocationWithMethodSignature:signature];
     invocation.target=target;
     invocation.selector=selector;
     NSUInteger count = signature.numberOfArguments;
-    for (NSUInteger i=0;i<count;i++){
+    for (NSUInteger i=2;i<count;i++){
         const char * argumenttype = [signature getArgumentTypeAtIndex:i];
         JSValue * argumentvalue = [arguments objectAtIndex:i];
-        if(!processArgument(invocation, argumentvalue, argumenttype, i)){
-            
+        if(!processArgument(invocation, argumentvalue, argumenttype, i-2)){
+            NSParameterAssert(0);
         }
     }
     const char * returntype=signature.methodReturnType;
@@ -476,14 +478,14 @@ JSExportAs(__property__, - (JSValue*)propertyOfValue:(JSValue*)value byPropertyn
 
 - (JSValue*)propertyOfValue:(JSValue*)value byPropertyname:(NSString*)propertyname{
     if (propertyname.length==0) return [JSValue valueWithObject:nil inContext:self.context];
-    //1.context property
-    if (value.isNull||value.isUndefined) { JSValue *ret=self.context[propertyname]; if (ret) return ret; }
+    //1.context property,duplicated,do not work
+     JSValue *ret=value[propertyname];
+    if (![ret isNull]&&![ret isUndefined]) return ret;
     //2.class
-    NSString *classname=[value toString];
+    NSString *classname=propertyname;
     Class cls=NSClassFromString(classname);
     if (cls)return [JSValue valueWithObject:cls inContext:self.context];
-    //3.instance
-    return [JSValue valueWithObject:[[value toObject] valueForKey:propertyname] inContext:self.context];
+    return [JSValue valueWithObject:nil inContext:self.context];
 }
 
 @end

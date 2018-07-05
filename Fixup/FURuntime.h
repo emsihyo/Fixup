@@ -25,4 +25,7 @@ typedef UIEdgeInsets NSEdgeInsets;
 
 @property(nonatomic,weak)JSContext *context;
 
+- (instancetype)init NS_UNAVAILABLE;
+- (instancetype)initWithContext:(JSContext*)context NS_DESIGNATED_INITIALIZER;
+
 @end

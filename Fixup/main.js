@@ -1,21 +1,15 @@
 (function(){
+    Object.defineProperty(Object.prototype, "$property", {value: function(v){
+        if (this.hasOwnProperty(v)) return this.v
+        //get property value outside virtual machine
+        return $.__property__(this,v)
+    }})
 
-   //
-   Object.defineProperty($, "call", {value: function($var,$method){
-
-   }})
-   //()
-   Object.defineProperty($, "property", {value: function(v){
-       if ($.hasOwnProperty(v)) return $.v
-       //get property value outside virtual machine
-
-   }})
-
-   //in ()
-   //
-   Object.defineProperty($, "func", {value: function(f){
-       if ($.hasOwnProperty(f)) return $.f
-       //get function returns outside virtual machine
-
+    Object.defineProperty(Object.prototype, "$function", {value: function(){
+    var target = this
+    var func = arguments[0]
+    return function(){
+        $.__call__(target,func,Array.prototype.slice.call(arguments))
+    }
    }})
 })()

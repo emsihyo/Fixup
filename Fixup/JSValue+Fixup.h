@@ -31,4 +31,18 @@
 - (NSDirectionalEdgeInsets)toDirectionalEdgeInsets API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
 + (JSValue *)valueWithDirectionalEdgeInsets:(NSDirectionalEdgeInsets)value inContext:(JSContext *)context API_AVAILABLE(ios(11.0),tvos(11.0),watchos(4.0));
 
++ (JSValue *)valueWithData:(NSData*)value inContext:(JSContext *)context;
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+

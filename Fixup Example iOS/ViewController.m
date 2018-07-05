@@ -10,23 +10,6 @@
 
 #import "ViewController.h"
 
-@interface Test :NSObject
-
-@property (nonatomic,strong)id p;
-
-@end
-
-@implementation Test
-
-+ (void)c{
-    
-}
-
-- (void)i{
-    
-}
-@end
-
 @interface ViewController ()
 
 @end
@@ -35,7 +18,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [FUJSContext.shared evaluateScript:@"NSString.alloc()"];
+    NSError *error;
+     [FUJSContext.shared evaluateScript:@"NSString.alloc().init()" withSourceURL:nil error:&error];
+    if (error){
+        NSLog(@"%@",error.localizedDescription);
+    }
     // Do any additional setup after loading the view, typically from a nib.
 }
 
