@@ -35,7 +35,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [FUJSContext.shared registerClass:Test.class forJSName:@"Test"];
+    [FUJSContext.shared evaluateScript:@"NSString.alloc()"];
     // Do any additional setup after loading the view, typically from a nib.
 }
 

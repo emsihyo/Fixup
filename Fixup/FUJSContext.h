@@ -12,6 +12,8 @@
 
 @property(class,readonly)FUJSContext *shared;
 
-- (void)registerClass:(Class)cls forJSName:(NSString*)jsname;
+- (JSValue*)evaluateScriptWithURL:(NSURL*)url error:(NSError**)error;
+
+- (JSValue*)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL error:(NSError**)error;
 
 @end

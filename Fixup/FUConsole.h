@@ -6,7 +6,8 @@
 //  Copyright © 2018年 Fixup. All rights reserved.
 //
 
-#import "FUComponent.h"
+@import Foundation;
+@import JavaScriptCore;
 
 @protocol FUConsoleJSExport <JSExport>
 
@@ -14,6 +15,6 @@
 
 @end
 
-@interface FUConsole : FUComponent<FUConsoleJSExport>
+@interface FUConsole : NSObject<FUConsoleJSExport>
 
 @end

@@ -6,15 +6,13 @@
 //  Copyright © 2018年 Fixup. All rights reserved.
 //
 
-#import "FUClass.h"
 #import "FUConsole.h"
 #import "FUJSContext.h"
-
+#import "FURuntime.h"
 @interface FUJSContext()
 
-@property (nonatomic,copy)NSString *script;
-@property (nonatomic,strong)NSMutableDictionary *classmap;
-@property (nonatomic,strong)NSDictionary        *blocks;
+@property (nonatomic,copy  ) NSString            *script;
+@property (nonatomic,strong) NSDictionary        *blocks;
 
 @end
 
@@ -26,60 +24,68 @@
     return shared;
 }
 
-- (JSValue*)evaluateScript:(NSString *)script{
-    self.script=script;
-    return [super evaluateScript:script];
+- (JSValue*)evaluateScriptWithURL:(NSURL*)url error:(NSError**)error{
+    NSURL *sourceURL=[url URLByDeletingLastPathComponent];
+    NSString *script=[NSString stringWithContentsOfURL:url encoding:NSUTF8StringEncoding error:error];
+    return [self evaluateScript:script withSourceURL:sourceURL error:error];
 }
+
+- (JSValue*)evaluateScript:(NSString *)script{
+    return [self evaluateScript:script withSourceURL:nil error:nil];
+}
+
+- (JSValue*)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL{
+    return [self evaluateScript:script withSourceURL:sourceURL error:nil];
+}
+
+- (JSValue*)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL error:(NSError**)error{
+    return [self evaluateScript:script replaceable:YES withSourceURL:sourceURL error:error];
+}
+
+- (JSValue*)evaluateScript:(NSString *)script replaceable:(BOOL)replaceable withSourceURL:(NSURL *)sourceURL  error:(NSError**)error{
+    if (script.length==0) return nil;
+    //replace scrpit
+    if (replaceable){
+        static NSRegularExpression *regexProperty;
+        static NSRegularExpression *regexFunction;
+        static dispatch_once_t onceToken;
+        dispatch_once(&onceToken, ^{
+            regexProperty=[NSRegularExpression regularExpressionWithPattern:@"(?<!\\\\)\\s*([\\w\\$]+)\\s*(?=\\.)" options:0 error:nil];
+            regexFunction=[NSRegularExpression regularExpressionWithPattern:@"(?<!\\\\)\\.\\s*([\\w\\$]+)\\s*\\(" options:0 error:nil];
+        });
+        script = [regexProperty stringByReplacingMatchesInString:script options:0 range:NSMakeRange(0, script.length) withTemplate:@"$property(\"$1\")"];
+        script = [regexFunction stringByReplacingMatchesInString:script options:0 range:NSMakeRange(0, script.length) withTemplate:@".$function(\"$1\")("];
+    }
+    JSContextRef contextRef = self.JSGlobalContextRef;
+    JSStringRef scriptRef = JSStringCreateWithUTF8CString(script.UTF8String);
+    JSStringRef sourceURLRef = NULL;
+    if (sourceURL) sourceURLRef=JSStringCreateWithUTF8CString(sourceURL.absoluteString.UTF8String);
+    JSValueRef exceptionRef = NULL;
+    JSValueRef value = JSEvaluateScript(contextRef, scriptRef, NULL, sourceURLRef, 1, &exceptionRef);
+    JSStringRelease(scriptRef);
+    if (sourceURLRef) JSStringRelease(sourceURLRef);
+    if (exceptionRef){
+        JSValue *e=[JSValue valueWithJSValueRef:exceptionRef inContext:self];
+        if (error) *error = [NSError errorWithDomain:@"JSErrorDomain" code:-1 userInfo:@{NSLocalizedDescriptionKey:[NSString stringWithFormat:@"\n%@\n%@",[e toString],[e toDictionary]]}];
+    }
+    return [JSValue valueWithJSValueRef:value inContext:self];
+}
+
+
 
 - (instancetype)init{
     self=[super init];
     if (!self) return nil;
-    self.classmap=[NSMutableDictionary dictionary];
-    static NSRegularExpression *regex;
-    static dispatch_once_t onceToken;
-    dispatch_once(&onceToken, ^{
-        regex=[NSRegularExpression regularExpressionWithPattern:@"Can't\\sfind\\svariable:\\s([^\\s]*)" options:0 error:nil];
-    });
-    self.exceptionHandler = ^(JSContext *_context, JSValue *exception) {
-        FUJSContext *context=(FUJSContext*)_context;
-        NSLog(@"\nexception:\n%@\n%@\n javascript:\n%@\n",[exception toString],[exception toDictionary],[context script]);
-        NSString *e=[exception toString];
-        NSArray * results=[regex matchesInString:e options:0 range:NSMakeRange(0, e.length)];
-        for (NSTextCheckingResult *result in results){
-            if ([result numberOfRanges]<2) break;
-            NSString *classname=[e substringWithRange:[result rangeAtIndex:1]];
-            Class cls=NSClassFromString(classname);
-            if (!cls) break;
-            [context registerClass:cls forJSName:classname];
-            [context evaluateScript:context.script];
-        }
-    };
-    [self loadCompnents];
-    [self evaluateScript:[NSString stringWithContentsOfFile:[[NSBundle bundleForClass:self.class] pathForResource:@"main" ofType:@"js"] encoding:NSUTF8StringEncoding error:nil]];
+    self[@"$"]=[[FURuntime alloc]init];
+    self[@"console"]=[[FUConsole alloc]init];
+    NSURL *sourceURL=[[[NSBundle bundleForClass:self.class] URLForResource:@"main" withExtension:@"js"] URLByDeletingLastPathComponent];
+    NSString *script=[NSString stringWithContentsOfURL:[[NSBundle bundleForClass:self.class] URLForResource:@"main" withExtension:@"js"] encoding:NSUTF8StringEncoding error:nil];
+    NSError *error;
+    [self evaluateScript:script replaceable:NO withSourceURL:sourceURL error:&error];
+    if (error) NSLog(@"%@",error.localizedDescription);
     return self;
 }
 
-- (void)loadCompnents{
-    FUConsole *console = [[FUConsole alloc]initWithName:@"console"];
-    [self loadComponent:console];
-}
-
-- (void)loadComponent:(__kindof FUComponent*) component{
-    self[component.name]=component;
-}
-
-- (void)registerClass:(Class)cls forJSName:(NSString*)jsname{
-    FUClass *clz=[[FUClass alloc]initWithClass:cls];
-    self.classmap[jsname]=clz;
-    self[jsname]=[clz dictionary];
-    NSString *(^processMethodname)(NSString *)=^(NSString* methodname){
-        return [methodname stringByReplacingOccurrencesOfString:@":" withString:@"-"];
-    };
-    [clz.instancemethods enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, FUMethod * _Nonnull method, BOOL * _Nonnull stop) {
-        [self[jsname] setValue:self.blocks[[method.returntype stringByAppendingString:[method.argumenttypes componentsJoinedByString:@""]]] forProperty:processMethodname(method.methodname)];
-    }];
-//    NSLog(@"%@",clz.dictionary);
-}
 
 @end
 

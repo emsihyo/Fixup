@@ -1,20 +1,21 @@
-var $global = this;
 (function(){
 
-    //
-    Object.defineProperty(Object.prototype, "$execute", {value: function($var,$method){
-        
-        //try register
-    }})
-    //
-    Object.defineProperty(Object.prototype, "$var", {value: function($var){
-        if (πglobal.hasOwnProperty($var)) return $global.$var
-        //try register
-    }})
-    Object.defineProperty(Object.prototype, "$execute", {value: function(){
-        var args = Array.prototype.slice.call(arguments)
-        global.$
-        //try register
-    }})
-})()
+   //
+   Object.defineProperty($, "call", {value: function($var,$method){
 
+   }})
+   //()
+   Object.defineProperty($, "property", {value: function(v){
+       if ($.hasOwnProperty(v)) return $.v
+       //get property value outside virtual machine
+
+   }})
+
+   //in ()
+   //
+   Object.defineProperty($, "func", {value: function(f){
+       if ($.hasOwnProperty(f)) return $.f
+       //get function returns outside virtual machine
+
+   }})
+})()

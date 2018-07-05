@@ -7,20 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0A33FDCF20ECF0CD002BCBC3 /* FUClass.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A33FDCD20ECF0CD002BCBC3 /* FUClass.h */; };
-		0A33FDD020ECF0CD002BCBC3 /* FUClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A33FDCE20ECF0CD002BCBC3 /* FUClass.m */; };
-		0A33FDD320ECF0DA002BCBC3 /* FUMethod.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A33FDD120ECF0DA002BCBC3 /* FUMethod.h */; };
-		0A33FDD420ECF0DA002BCBC3 /* FUMethod.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A33FDD220ECF0DA002BCBC3 /* FUMethod.m */; };
-		0A33FDDB20ECF0F6002BCBC3 /* FUProperty.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A33FDD920ECF0F6002BCBC3 /* FUProperty.h */; };
-		0A33FDDC20ECF0F6002BCBC3 /* FUProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A33FDDA20ECF0F6002BCBC3 /* FUProperty.m */; };
-		0A33FDDF20ECF121002BCBC3 /* FUProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A33FDDD20ECF121002BCBC3 /* FUProtocol.h */; };
-		0A33FDE020ECF121002BCBC3 /* FUProtocol.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A33FDDE20ECF121002BCBC3 /* FUProtocol.m */; };
 		0A33FDE320ECF8D6002BCBC3 /* FUJSContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A33FDE120ECF8D6002BCBC3 /* FUJSContext.m */; };
 		0A33FDE420ECF8D6002BCBC3 /* FUJSContext.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A33FDE220ECF8D6002BCBC3 /* FUJSContext.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A33FDE720ECF990002BCBC3 /* FUConsole.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A33FDE520ECF990002BCBC3 /* FUConsole.h */; };
 		0A33FDE820ECF990002BCBC3 /* FUConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A33FDE620ECF990002BCBC3 /* FUConsole.m */; };
-		0A33FDEC20ECFA67002BCBC3 /* FUComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A33FDEA20ECFA67002BCBC3 /* FUComponent.h */; };
-		0A33FDED20ECFA67002BCBC3 /* FUComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A33FDEB20ECFA67002BCBC3 /* FUComponent.m */; };
 		0A4ED95D20EC124E00AFE040 /* Fixup.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A4ED95B20EC124E00AFE040 /* Fixup.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		0A4ED96F20EC14D700AFE040 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4ED96E20EC14D700AFE040 /* AppDelegate.m */; };
 		0A4ED97220EC14D700AFE040 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A4ED97120EC14D700AFE040 /* ViewController.m */; };
@@ -31,6 +21,19 @@
 		0A4ED98120EC150600AFE040 /* Fixup.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4ED95820EC124E00AFE040 /* Fixup.framework */; };
 		0A4ED98220EC150600AFE040 /* Fixup.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0A4ED95820EC124E00AFE040 /* Fixup.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		0A4ED98F20ECC54500AFE040 /* main.js in Resources */ = {isa = PBXBuildFile; fileRef = 0A4ED98E20ECC54500AFE040 /* main.js */; };
+		0A8B8BF620EDFB40000CE355 /* FURuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9FB63820EDB6A300F9F625 /* FURuntime.m */; };
+		0A8B8BF720EDFB42000CE355 /* FUJSContext.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A33FDE120ECF8D6002BCBC3 /* FUJSContext.m */; };
+		0A8B8BF920EDFB5E000CE355 /* FUConsole.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A33FDE620ECF990002BCBC3 /* FUConsole.m */; };
+		0A8B8C0220EDFBF5000CE355 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B8C0120EDFBF5000CE355 /* AppDelegate.m */; };
+		0A8B8C0420EDFBF6000CE355 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B8C0320EDFBF6000CE355 /* Assets.xcassets */; };
+		0A8B8C0720EDFBF6000CE355 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A8B8C0520EDFBF6000CE355 /* MainMenu.xib */; };
+		0A8B8C0A20EDFBF6000CE355 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B8C0920EDFBF6000CE355 /* main.m */; };
+		0A8B8C1120EE0BC8000CE355 /* JSValue+Fixup.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A8B8C0F20EE0BC8000CE355 /* JSValue+Fixup.h */; };
+		0A8B8C1220EE0BC8000CE355 /* JSValue+Fixup.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A8B8C0F20EE0BC8000CE355 /* JSValue+Fixup.h */; };
+		0A8B8C1320EE0BC8000CE355 /* JSValue+Fixup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B8C1020EE0BC8000CE355 /* JSValue+Fixup.m */; };
+		0A8B8C1420EE0BC8000CE355 /* JSValue+Fixup.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A8B8C1020EE0BC8000CE355 /* JSValue+Fixup.m */; };
+		0A9FB63920EDB6A300F9F625 /* FURuntime.h in Headers */ = {isa = PBXBuildFile; fileRef = 0A9FB63720EDB6A300F9F625 /* FURuntime.h */; };
+		0A9FB63A20EDB6A300F9F625 /* FURuntime.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A9FB63820EDB6A300F9F625 /* FURuntime.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,20 +61,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0A33FDCD20ECF0CD002BCBC3 /* FUClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUClass.h; sourceTree = "<group>"; };
-		0A33FDCE20ECF0CD002BCBC3 /* FUClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUClass.m; sourceTree = "<group>"; };
-		0A33FDD120ECF0DA002BCBC3 /* FUMethod.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUMethod.h; sourceTree = "<group>"; };
-		0A33FDD220ECF0DA002BCBC3 /* FUMethod.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUMethod.m; sourceTree = "<group>"; };
-		0A33FDD920ECF0F6002BCBC3 /* FUProperty.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUProperty.h; sourceTree = "<group>"; };
-		0A33FDDA20ECF0F6002BCBC3 /* FUProperty.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUProperty.m; sourceTree = "<group>"; };
-		0A33FDDD20ECF121002BCBC3 /* FUProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUProtocol.h; sourceTree = "<group>"; };
-		0A33FDDE20ECF121002BCBC3 /* FUProtocol.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUProtocol.m; sourceTree = "<group>"; };
 		0A33FDE120ECF8D6002BCBC3 /* FUJSContext.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FUJSContext.m; sourceTree = "<group>"; };
 		0A33FDE220ECF8D6002BCBC3 /* FUJSContext.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FUJSContext.h; sourceTree = "<group>"; };
 		0A33FDE520ECF990002BCBC3 /* FUConsole.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUConsole.h; sourceTree = "<group>"; };
 		0A33FDE620ECF990002BCBC3 /* FUConsole.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUConsole.m; sourceTree = "<group>"; };
-		0A33FDEA20ECFA67002BCBC3 /* FUComponent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FUComponent.h; sourceTree = "<group>"; };
-		0A33FDEB20ECFA67002BCBC3 /* FUComponent.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FUComponent.m; sourceTree = "<group>"; };
 		0A4ED95820EC124E00AFE040 /* Fixup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fixup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A4ED95B20EC124E00AFE040 /* Fixup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fixup.h; sourceTree = "<group>"; };
 		0A4ED95C20EC124E00AFE040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -86,6 +79,19 @@
 		0A4ED97B20EC14D900AFE040 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A4ED97C20EC14D900AFE040 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0A4ED98E20ECC54500AFE040 /* main.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = main.js; sourceTree = "<group>"; };
+		0A8B8BE920EDFAF3000CE355 /* Fixup.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fixup.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A8B8BFE20EDFBF5000CE355 /* Fixup macOS Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fixup macOS Example.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A8B8C0020EDFBF5000CE355 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		0A8B8C0120EDFBF5000CE355 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		0A8B8C0320EDFBF6000CE355 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		0A8B8C0620EDFBF6000CE355 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		0A8B8C0820EDFBF6000CE355 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A8B8C0920EDFBF6000CE355 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0A8B8C0B20EDFBF6000CE355 /* Fixup_macOS_Example.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Fixup_macOS_Example.entitlements; sourceTree = "<group>"; };
+		0A8B8C0F20EE0BC8000CE355 /* JSValue+Fixup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JSValue+Fixup.h"; sourceTree = "<group>"; };
+		0A8B8C1020EE0BC8000CE355 /* JSValue+Fixup.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "JSValue+Fixup.m"; sourceTree = "<group>"; };
+		0A9FB63720EDB6A300F9F625 /* FURuntime.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FURuntime.h; sourceTree = "<group>"; };
+		0A9FB63820EDB6A300F9F625 /* FURuntime.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FURuntime.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,29 +110,29 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0A8B8BE520EDFAF3000CE355 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A8B8BFB20EDFBF5000CE355 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0A33FDE920ECFA25002BCBC3 /* OCRuntime */ = {
-			isa = PBXGroup;
-			children = (
-				0A33FDCD20ECF0CD002BCBC3 /* FUClass.h */,
-				0A33FDCE20ECF0CD002BCBC3 /* FUClass.m */,
-				0A33FDD120ECF0DA002BCBC3 /* FUMethod.h */,
-				0A33FDD220ECF0DA002BCBC3 /* FUMethod.m */,
-				0A33FDD920ECF0F6002BCBC3 /* FUProperty.h */,
-				0A33FDDA20ECF0F6002BCBC3 /* FUProperty.m */,
-				0A33FDDD20ECF121002BCBC3 /* FUProtocol.h */,
-				0A33FDDE20ECF121002BCBC3 /* FUProtocol.m */,
-			);
-			path = OCRuntime;
-			sourceTree = "<group>";
-		};
 		0A4ED94E20EC124E00AFE040 = {
 			isa = PBXGroup;
 			children = (
 				0A4ED95A20EC124E00AFE040 /* Fixup */,
 				0A4ED96C20EC14D700AFE040 /* Fixup Example iOS */,
+				0A8B8BFF20EDFBF5000CE355 /* Fixup macOS Example */,
 				0A4ED95920EC124E00AFE040 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -136,6 +142,8 @@
 			children = (
 				0A4ED95820EC124E00AFE040 /* Fixup.framework */,
 				0A4ED96B20EC14D700AFE040 /* Fixup Example iOS.app */,
+				0A8B8BE920EDFAF3000CE355 /* Fixup.framework */,
+				0A8B8BFE20EDFBF5000CE355 /* Fixup macOS Example.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -143,11 +151,15 @@
 		0A4ED95A20EC124E00AFE040 /* Fixup */ = {
 			isa = PBXGroup;
 			children = (
-				0A33FDE920ECFA25002BCBC3 /* OCRuntime */,
-				0A4ED9A320ECE81D00AFE040 /* Components */,
 				0A4ED95B20EC124E00AFE040 /* Fixup.h */,
+				0A9FB63720EDB6A300F9F625 /* FURuntime.h */,
+				0A9FB63820EDB6A300F9F625 /* FURuntime.m */,
+				0A33FDE520ECF990002BCBC3 /* FUConsole.h */,
+				0A33FDE620ECF990002BCBC3 /* FUConsole.m */,
 				0A33FDE220ECF8D6002BCBC3 /* FUJSContext.h */,
 				0A33FDE120ECF8D6002BCBC3 /* FUJSContext.m */,
+				0A8B8C0F20EE0BC8000CE355 /* JSValue+Fixup.h */,
+				0A8B8C1020EE0BC8000CE355 /* JSValue+Fixup.m */,
 				0A4ED95C20EC124E00AFE040 /* Info.plist */,
 				0A4ED98E20ECC54500AFE040 /* main.js */,
 			);
@@ -170,15 +182,18 @@
 			path = "Fixup Example iOS";
 			sourceTree = "<group>";
 		};
-		0A4ED9A320ECE81D00AFE040 /* Components */ = {
+		0A8B8BFF20EDFBF5000CE355 /* Fixup macOS Example */ = {
 			isa = PBXGroup;
 			children = (
-				0A33FDEA20ECFA67002BCBC3 /* FUComponent.h */,
-				0A33FDEB20ECFA67002BCBC3 /* FUComponent.m */,
-				0A33FDE520ECF990002BCBC3 /* FUConsole.h */,
-				0A33FDE620ECF990002BCBC3 /* FUConsole.m */,
+				0A8B8C0020EDFBF5000CE355 /* AppDelegate.h */,
+				0A8B8C0120EDFBF5000CE355 /* AppDelegate.m */,
+				0A8B8C0320EDFBF6000CE355 /* Assets.xcassets */,
+				0A8B8C0520EDFBF6000CE355 /* MainMenu.xib */,
+				0A8B8C0820EDFBF6000CE355 /* Info.plist */,
+				0A8B8C0920EDFBF6000CE355 /* main.m */,
+				0A8B8C0B20EDFBF6000CE355 /* Fixup_macOS_Example.entitlements */,
 			);
-			path = Components;
+			path = "Fixup macOS Example";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,14 +203,19 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A33FDD320ECF0DA002BCBC3 /* FUMethod.h in Headers */,
+				0A8B8C1120EE0BC8000CE355 /* JSValue+Fixup.h in Headers */,
 				0A33FDE420ECF8D6002BCBC3 /* FUJSContext.h in Headers */,
 				0A33FDE720ECF990002BCBC3 /* FUConsole.h in Headers */,
-				0A33FDCF20ECF0CD002BCBC3 /* FUClass.h in Headers */,
-				0A33FDDB20ECF0F6002BCBC3 /* FUProperty.h in Headers */,
-				0A33FDEC20ECFA67002BCBC3 /* FUComponent.h in Headers */,
+				0A9FB63920EDB6A300F9F625 /* FURuntime.h in Headers */,
 				0A4ED95D20EC124E00AFE040 /* Fixup.h in Headers */,
-				0A33FDDF20ECF121002BCBC3 /* FUProtocol.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A8B8BE620EDFAF3000CE355 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A8B8C1220EE0BC8000CE355 /* JSValue+Fixup.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -239,6 +259,41 @@
 			productReference = 0A4ED96B20EC14D700AFE040 /* Fixup Example iOS.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0A8B8BE820EDFAF3000CE355 /* Fixup macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A8B8BEE20EDFAF3000CE355 /* Build configuration list for PBXNativeTarget "Fixup macOS" */;
+			buildPhases = (
+				0A8B8BE420EDFAF3000CE355 /* Sources */,
+				0A8B8BE520EDFAF3000CE355 /* Frameworks */,
+				0A8B8BE620EDFAF3000CE355 /* Headers */,
+				0A8B8BE720EDFAF3000CE355 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Fixup macOS";
+			productName = "Fixup macOS";
+			productReference = 0A8B8BE920EDFAF3000CE355 /* Fixup.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		0A8B8BFD20EDFBF5000CE355 /* Fixup macOS Example */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0A8B8C0C20EDFBF6000CE355 /* Build configuration list for PBXNativeTarget "Fixup macOS Example" */;
+			buildPhases = (
+				0A8B8BFA20EDFBF5000CE355 /* Sources */,
+				0A8B8BFB20EDFBF5000CE355 /* Frameworks */,
+				0A8B8BFC20EDFBF5000CE355 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Fixup macOS Example";
+			productName = "Fixup macOS Example";
+			productReference = 0A8B8BFE20EDFBF5000CE355 /* Fixup macOS Example.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -253,6 +308,12 @@
 					};
 					0A4ED96A20EC14D700AFE040 = {
 						CreatedOnToolsVersion = 9.4;
+					};
+					0A8B8BE820EDFAF3000CE355 = {
+						CreatedOnToolsVersion = 9.4.1;
+					};
+					0A8B8BFD20EDFBF5000CE355 = {
+						CreatedOnToolsVersion = 9.4.1;
 					};
 				};
 			};
@@ -270,7 +331,9 @@
 			projectRoot = "";
 			targets = (
 				0A4ED95720EC124E00AFE040 /* Fixup iOS */,
+				0A8B8BE820EDFAF3000CE355 /* Fixup macOS */,
 				0A4ED96A20EC14D700AFE040 /* Fixup Example iOS */,
+				0A8B8BFD20EDFBF5000CE355 /* Fixup macOS Example */,
 			);
 		};
 /* End PBXProject section */
@@ -294,6 +357,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0A8B8BE720EDFAF3000CE355 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A8B8BFC20EDFBF5000CE355 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A8B8C0420EDFBF6000CE355 /* Assets.xcassets in Resources */,
+				0A8B8C0720EDFBF6000CE355 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -302,12 +381,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0A33FDE820ECF990002BCBC3 /* FUConsole.m in Sources */,
-				0A33FDE020ECF121002BCBC3 /* FUProtocol.m in Sources */,
-				0A33FDDC20ECF0F6002BCBC3 /* FUProperty.m in Sources */,
-				0A33FDD020ECF0CD002BCBC3 /* FUClass.m in Sources */,
+				0A8B8C1320EE0BC8000CE355 /* JSValue+Fixup.m in Sources */,
 				0A33FDE320ECF8D6002BCBC3 /* FUJSContext.m in Sources */,
-				0A33FDD420ECF0DA002BCBC3 /* FUMethod.m in Sources */,
-				0A33FDED20ECFA67002BCBC3 /* FUComponent.m in Sources */,
+				0A9FB63A20EDB6A300F9F625 /* FURuntime.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -318,6 +394,26 @@
 				0A4ED97220EC14D700AFE040 /* ViewController.m in Sources */,
 				0A4ED97D20EC14D900AFE040 /* main.m in Sources */,
 				0A4ED96F20EC14D700AFE040 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A8B8BE420EDFAF3000CE355 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A8B8C1420EE0BC8000CE355 /* JSValue+Fixup.m in Sources */,
+				0A8B8BF720EDFB42000CE355 /* FUJSContext.m in Sources */,
+				0A8B8BF920EDFB5E000CE355 /* FUConsole.m in Sources */,
+				0A8B8BF620EDFB40000CE355 /* FURuntime.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0A8B8BFA20EDFBF5000CE355 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0A8B8C0A20EDFBF6000CE355 /* main.m in Sources */,
+				0A8B8C0220EDFBF5000CE355 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +442,14 @@
 				0A4ED97920EC14D900AFE040 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		0A8B8C0520EDFBF6000CE355 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A8B8C0620EDFBF6000CE355 /* Base */,
+			);
+			name = MainMenu.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -479,6 +583,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Fixup/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -503,6 +608,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Fixup/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -549,6 +655,102 @@
 			};
 			name = Release;
 		};
+		0A8B8BEF20EDFAF3000CE355 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N4WZ33Z6KM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "$(SRCROOT)/Fixup/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.retriable.Fixup-macOS";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		0A8B8BF020EDFAF3000CE355 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = N4WZ33Z6KM;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = "$(SRCROOT)/Fixup/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.retriable.Fixup-macOS";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		0A8B8C0D20EDFBF6000CE355 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Fixup macOS Example/Fixup_macOS_Example.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N4WZ33Z6KM;
+				INFOPLIST_FILE = "Fixup macOS Example/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.retriable.Fixup-macOS-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		0A8B8C0E20EDFBF6000CE355 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Fixup macOS Example/Fixup_macOS_Example.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = N4WZ33Z6KM;
+				INFOPLIST_FILE = "Fixup macOS Example/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.retriable.Fixup-macOS-Example";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -575,6 +777,24 @@
 			buildConfigurations = (
 				0A4ED97F20EC14D900AFE040 /* Debug */,
 				0A4ED98020EC14D900AFE040 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A8B8BEE20EDFAF3000CE355 /* Build configuration list for PBXNativeTarget "Fixup macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A8B8BEF20EDFAF3000CE355 /* Debug */,
+				0A8B8BF020EDFAF3000CE355 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0A8B8C0C20EDFBF6000CE355 /* Build configuration list for PBXNativeTarget "Fixup macOS Example" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0A8B8C0D20EDFBF6000CE355 /* Debug */,
+				0A8B8C0E20EDFBF6000CE355 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
