@@ -6,13 +6,15 @@
 //  Copyright © 2018 Fixup. All rights reserved.
 //
 
+#import <objc/message.h>
 #import <objc/runtime.h>
 #import <TargetConditionals.h>
 
 #import "FURuntime.h"
 #import "JSValue+Fixup.h"
 
-static bool processArgument(NSInvocation *invocation,JSValue *argument,const char * type,NSUInteger i){
+
+static bool processArgument(NSInvocation *invocation,id argument,const char * type,NSUInteger i){
     BOOL ret=true;
     switch (type[0]) {
         case 'v':
@@ -20,59 +22,62 @@ static bool processArgument(NSInvocation *invocation,JSValue *argument,const cha
             ret=false;
             break;
         case 'B':{
-            BOOL v = [[argument toNumber] boolValue];
+            if ([argument isKindOfClass:NSNumber.class]){
+                
+            }
+            BOOL v = [argument boolValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'c':{
-            char v = [[argument toNumber] charValue];
+            char v = [argument charValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'C': {
-            unsigned char v = [[argument toNumber] unsignedCharValue];
+            unsigned char v = [argument unsignedCharValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 's': {
-            short v = [[argument toNumber] shortValue];
+            short v = [argument  shortValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'S': {
-            unsigned short v = [[argument toNumber] unsignedShortValue];
+            unsigned short v = [argument unsignedShortValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'i': {
-            int v = [[argument toNumber] intValue];
+            int v = [argument intValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'I': {
-            unsigned int v = [[argument toNumber] unsignedIntValue];
+            unsigned int v = [argument unsignedIntValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'l': {
-            long v = [[argument toNumber] longValue];
+            long v = [argument longValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'L': {
-            unsigned long v = [[argument toNumber] longValue];
+            unsigned long v = [argument longValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'q': {
-            long long v = [[argument toNumber] longLongValue];
+            long long v = [argument longLongValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'Q': {
-            unsigned long long v = [[argument toNumber] unsignedLongLongValue];
+            unsigned long long v = [argument unsignedLongLongValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'f': {
-            float v = [[argument toNumber] floatValue];
+            float v = [argument floatValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'd': {
-            double v = [[argument toNumber] doubleValue];
+            double v = [argument doubleValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case 'D':  {
-            long double v = [[argument toNumber] doubleValue];
+            long double v = [argument doubleValue];
             [invocation setArgument:&v atIndex:i];
         } break;
         case '#': {
@@ -176,55 +181,11 @@ static bool processArgument(NSInvocation *invocation,JSValue *argument,const cha
                 ret=false;
                 break;
             }
-            NSScanner *scanner = [NSScanner scannerWithString:[NSString stringWithUTF8String:type]];
-            if (![scanner scanString:@"@\"" intoString:NULL]) break;
-            NSString *clsName = nil;
-            if (![scanner scanUpToCharactersFromSet: [NSCharacterSet characterSetWithCharactersInString:@"\"<"] intoString:&clsName]||!clsName.length) break;
-            Class cls = NSClassFromString(clsName);
-            if (cls==NSString.class) {
-                NSString * v=[argument toString];
-                [invocation setArgument:&v atIndex:i];
-            }else if(cls==NSMutableString.class) {
-                NSMutableString * v=[[argument toString] mutableCopy];
-                [invocation setArgument:&v atIndex:i];
-            } else if(cls==NSURL.class) {
-                NSURL * v=[NSURL URLWithString:[argument toString]];
-                [invocation setArgument:&v atIndex:i];
-            } else if(cls==NSNumber.class) {
-                NSNumber * v=[argument toNumber];
-                [invocation setArgument:&v atIndex:i];
-            } else if(cls==NSDate.class){
-                NSDate * v=[argument toDate];
-                [invocation setArgument:&v atIndex:i];
-            } else if(cls==NSData.class){
-                NSData *v = [[argument toString] dataUsingEncoding:NSISOLatin1StringEncoding];
-                [invocation setArgument:&v atIndex:i];
-            } else if(cls==NSMutableData.class) {
-                NSMutableData *v = [[[argument toString] dataUsingEncoding:NSISOLatin1StringEncoding] mutableCopy];
-                [invocation setArgument:&v atIndex:i];
-            } else if(cls==NSArray.class) {
-                NSArray * v = [argument toArray];
-                [invocation setArgument:&v atIndex:i];
-            } else if(cls==NSMutableArray.class) {
-                NSMutableArray * v = [[argument toArray] mutableCopy];
-                [invocation setArgument:&v atIndex:i];
-            } else if(cls==NSSet.class){
-                NSSet *v=[NSSet setWithArray:[argument toArray]];
-                [invocation setArgument:&v atIndex:i];
-            } else if(cls==NSMutableSet.class) {
-                NSMutableSet *v=[[NSSet setWithArray:[argument toArray]] mutableCopy];
-                [invocation setArgument:&v atIndex:i];
-            } else if(cls==NSDictionary.class) {
-                NSDictionary *v=[argument toDictionary];
-                [invocation setArgument:&v atIndex:i];
-            } else if(cls==NSMutableDictionary.class){
-                NSMutableDictionary *v=[[argument toDictionary]mutableCopy];
-                [invocation setArgument:&v atIndex:i];
-            } else {
-                NSObject *v =[argument toObject];
-                [invocation setArgument:&v atIndex:i];
+            if ([argument isKindOfClass:JSValue.class]){
+                argument=[argument toObject];
             }
-        }
+            [invocation setArgument:&argument atIndex:i];
+        }break;
         default:
             ret=false;
             break;
@@ -234,11 +195,10 @@ static bool processArgument(NSInvocation *invocation,JSValue *argument,const cha
 
 
 static JSValue * processReturn(NSInvocation *invocation,const char * returntype,JSContext *context){
-    [invocation invoke];
     JSValue *returnvalue;
     switch (returntype[0]) {
         case 'v':
-            NSCParameterAssert(0);
+            returnvalue=[JSValue valueWithNullInContext:context];
             break;
         case 'B':{
             BOOL v;
@@ -428,7 +388,7 @@ static JSValue * processReturn(NSInvocation *invocation,const char * returntype,
 
 @protocol  FURuntimeJSExport <JSExport>
 
-JSExportAs(__call__, - (JSValue*)callWithValue:(JSValue*)value withSelectorname:(NSString*)selectorname withArguments:(NSArray<JSValue *>*)arguments);
+JSExportAs(__call__, - (JSValue*)callWithValue:(JSValue*)value withSelectorname:(NSString*)selectorname withArguments:(NSArray*)arguments);
 JSExportAs(__property__, - (JSValue*)propertyOfValue:(JSValue*)value byPropertyname:(NSString*)propertyname);
 
 @end
@@ -451,41 +411,47 @@ JSExportAs(__property__, - (JSValue*)propertyOfValue:(JSValue*)value byPropertyn
 }
 
 
-- (JSValue*)callWithValue:(JSValue*)value withSelectorname:(NSString*)selectorname withArguments:(NSArray<JSValue *>*)arguments{
+- (JSValue*)callWithValue:(JSValue*)value withSelectorname:(NSString*)selectorname withArguments:(NSArray*)arguments{
+    selectorname=[selectorname stringByReplacingOccurrencesOfString:@"&" withString:@":"];
+    id target;
+    NSMethodSignature *signature;
     SEL selector=NSSelectorFromString(selectorname);
-    //object or class
-    id target = [value toObject];
-    //class or metaclass
-    Class targetclass=object_getClass(target);
-   
-    if (![targetclass respondsToSelector:selector]) return [JSValue valueWithObject:nil inContext:self.context];
-    
-    NSMethodSignature *signature=[target methodSignatureForSelector:selector];
+    if ([selectorname hasPrefix:@"alloc"]){
+        return value;
+    }else if([selectorname hasPrefix:@"init"]){
+        Class cls=[value toObject];
+        target = [cls alloc];
+        void * voidTarget = (__bridge void *)target;
+        target = (__bridge_transfer id)voidTarget;
+        signature = [cls instanceMethodSignatureForSelector:selector];
+    }else{
+        target = [value toObject];
+        signature=[target methodSignatureForSelector:selector];
+    }
+    if (!target||!signature||!selector) return [JSValue valueWithNullInContext:self.context];
     NSInvocation *invocation=[NSInvocation invocationWithMethodSignature:signature];
     invocation.target=target;
     invocation.selector=selector;
     NSUInteger count = signature.numberOfArguments;
     for (NSUInteger i=2;i<count;i++){
         const char * argumenttype = [signature getArgumentTypeAtIndex:i];
-        JSValue * argumentvalue = [arguments objectAtIndex:i];
-        if(!processArgument(invocation, argumentvalue, argumenttype, i-2)){
+        id argumentvalue = [arguments objectAtIndex:i-2];
+        if(!processArgument(invocation, argumentvalue, argumenttype, i)){
             NSParameterAssert(0);
+            return [JSValue valueWithNullInContext:self.context];
         }
     }
     const char * returntype=signature.methodReturnType;
+    [invocation invoke];
     return processReturn(invocation, returntype,self.context);
 }
 
 - (JSValue*)propertyOfValue:(JSValue*)value byPropertyname:(NSString*)propertyname{
-    if (propertyname.length==0) return [JSValue valueWithObject:nil inContext:self.context];
-    //1.context property,duplicated,do not work
-     JSValue *ret=value[propertyname];
-    if (![ret isNull]&&![ret isUndefined]) return ret;
-    //2.class
+    if (propertyname.length==0) return [JSValue valueWithNullInContext:self.context];
     NSString *classname=propertyname;
     Class cls=NSClassFromString(classname);
     if (cls)return [JSValue valueWithObject:cls inContext:self.context];
-    return [JSValue valueWithObject:nil inContext:self.context];
+    return [JSValue valueWithNullInContext:self.context];
 }
 
 @end

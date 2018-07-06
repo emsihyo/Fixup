@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSError *error;
-     [FUJSContext.shared evaluateScript:@"NSString.alloc().init()" withSourceURL:nil error:&error];
+    [FUJSContext.shared evaluateScript:@"var b = NSString.alloc().initWithString&('bca');var c = b + 'haha'; if(typeof b==='string'){ console.log(b) }" withSourceURL:nil error:&error];
     if (error){
         NSLog(@"%@",error.localizedDescription);
     }
@@ -31,6 +31,5 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 @end

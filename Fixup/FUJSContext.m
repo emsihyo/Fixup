@@ -50,11 +50,13 @@
         static NSRegularExpression *regexFunction;
         static dispatch_once_t onceToken;
         dispatch_once(&onceToken, ^{
-            regexProperty=[NSRegularExpression regularExpressionWithPattern:@"(?<!\\\\)\\s*([\\w\\$]+)\\s*(?=\\.)" options:0 error:nil];
-            regexFunction=[NSRegularExpression regularExpressionWithPattern:@"(?<!\\\\)\\.\\s*([\\w\\$]+)\\s*\\(" options:0 error:nil];
+            regexProperty=[NSRegularExpression regularExpressionWithPattern:@"\\s*([\\w\\$\\&]+)\\s*(?=\\.)" options:0 error:nil];
+            regexFunction=[NSRegularExpression regularExpressionWithPattern:@"\\.\\s*([\\w\\$\\&]+)\\s*\\(" options:0 error:nil];
         });
-        script = [regexProperty stringByReplacingMatchesInString:script options:0 range:NSMakeRange(0, script.length) withTemplate:@"$property(\"$1\")"];
-        script = [regexFunction stringByReplacingMatchesInString:script options:0 range:NSMakeRange(0, script.length) withTemplate:@".$function(\"$1\")("];
+        NSLog(@"%@",script);
+        script = [regexProperty stringByReplacingMatchesInString:script options:0 range:NSMakeRange(0, script.length) withTemplate:@"Ċạḷḷ(\"$1\")"];
+        script = [regexFunction stringByReplacingMatchesInString:script options:0 range:NSMakeRange(0, script.length) withTemplate:@".Ċạḷḷ(\"$1\")("];
+        NSLog(@"%@",script);
     }
     JSContextRef contextRef = self.JSGlobalContextRef;
     JSStringRef scriptRef = JSStringCreateWithUTF8CString(script.UTF8String);
@@ -76,6 +78,24 @@
 - (instancetype)init{
     self=[super init];
     if (!self) return nil;
+//    [self evaluateScript:@"(function(){\
+//     Object.defineProperty(Object.prototype, 'Ċạḷḷ', {value: function(){\
+//        //property name or method name\
+//        var name = arguments[0]\
+//        console.log('property js '+'name:'+name)\
+//        if (this.hasOwnProperty(name)) return this.name\
+//            //get property value outside virtual machine\
+//            console.log('property oc '+'name:'+name)\
+//            var property = $.__property__(this,name)\
+//            if (property!=null && typeof(property)!='undefined') return property\
+//                console.log('function '+'name:'+name)\
+//                //call method outside virtual machine\
+//                var target = this\
+//                return function(){\
+//                    return $.__call__(target,name,Array.prototype.slice.call(arguments))\
+//                }\
+//    }})\
+//     })()" replaceable:NO withSourceURL:nil error:nil];
     self[@"$"]=[[FURuntime alloc]initWithContext:self];
     self[@"console"]=[[FUConsole alloc]init];
     NSURL *sourceURL=[[[NSBundle bundleForClass:self.class] URLForResource:@"main" withExtension:@"js"] URLByDeletingLastPathComponent];
