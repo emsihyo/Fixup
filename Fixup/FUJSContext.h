@@ -16,4 +16,5 @@
 
 - (JSValue*)evaluateScript:(NSString *)script withSourceURL:(NSURL *)sourceURL error:(NSError**)error;
 
+- (JSValue*)evaluateScript:(NSString *)script replaceable:(BOOL)replaceable withSourceURL:(NSURL *)sourceURL  error:(NSError**)error;
 @end

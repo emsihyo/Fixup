@@ -54,8 +54,8 @@
             regexFunction=[NSRegularExpression regularExpressionWithPattern:@"\\.\\s*([\\w\\$\\&]+)\\s*\\(" options:0 error:nil];
         });
         NSLog(@"%@",script);
-        script = [regexProperty stringByReplacingMatchesInString:script options:0 range:NSMakeRange(0, script.length) withTemplate:@"Ċạḷḷ(\"$1\")"];
-        script = [regexFunction stringByReplacingMatchesInString:script options:0 range:NSMakeRange(0, script.length) withTemplate:@".Ċạḷḷ(\"$1\")("];
+        script = [regexProperty stringByReplacingMatchesInString:script options:0 range:NSMakeRange(0, script.length) withTemplate:@"ċȧŀŀ(\"$1\")"];
+        script = [regexFunction stringByReplacingMatchesInString:script options:0 range:NSMakeRange(0, script.length) withTemplate:@"ċȧŀŀ(\"$1\")("];
         NSLog(@"%@",script);
     }
     JSContextRef contextRef = self.JSGlobalContextRef;

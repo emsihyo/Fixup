@@ -22,9 +22,6 @@ static bool processArgument(NSInvocation *invocation,id argument,const char * ty
             ret=false;
             break;
         case 'B':{
-            if ([argument isKindOfClass:NSNumber.class]){
-                
-            }
             BOOL v = [argument boolValue];
             [invocation setArgument:&v atIndex:i];
         } break;
@@ -194,91 +191,90 @@ static bool processArgument(NSInvocation *invocation,id argument,const char * ty
 }
 
 
-static JSValue * processReturn(NSInvocation *invocation,const char * returntype,JSContext *context){
-    JSValue *returnvalue;
+static id processReturn(NSInvocation *invocation,const char * returntype,NSUInteger returnlength,JSContext *context){
+    id returnvalue=nil;
     switch (returntype[0]) {
         case 'v':
-            returnvalue=[JSValue valueWithNullInContext:context];
             break;
         case 'B':{
             BOOL v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithBool:v inContext:context];
+            returnvalue = @(v);
         } break;
         case 'c':{
             char v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithInt32:(int)v inContext:context];
+            returnvalue = @(v);
         } break;
         case 'C': {
             unsigned char v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithUInt32:(unsigned int)v inContext:context];
+            returnvalue = @(v);
         } break;
         case 's': {
             short v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithInt32:(int)v inContext:context];
+            returnvalue = @(v);
         } break;
         case 'S': {
             unsigned short v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithUInt32:(unsigned int)v inContext:context];
+            returnvalue = @(v);
         } break;
         case 'i': {
             int v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithInt32:v inContext:context];
+            returnvalue = @(v);
         } break;
         case 'I': {
             unsigned int v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithUInt32:v inContext:context];
+            returnvalue = @(v);
         } break;
         case 'l': {
             long v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithObject:@(v) inContext:context];
+            returnvalue = @(v);
         } break;
         case 'L': {
             unsigned long v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithObject:@(v) inContext:context];
+            returnvalue = @(v);
         } break;
         case 'q': {
             long long v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithObject:@(v) inContext:context];
+            returnvalue = @(v);
         } break;
         case 'Q': {
             unsigned long long v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithObject:@(v) inContext:context];
+            returnvalue = @(v);
         } break;
         case 'f': {
             float v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithDouble:(double)v inContext:context];
+            returnvalue = @(v);
         } break;
         case 'd': {
             double v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithDouble:v inContext:context];
+            returnvalue = @(v);
         } break;
         case 'D':  {
             long double v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithDouble:(double)v inContext:context];
+            returnvalue = @((double)v);
         } break;
         case '#': {
             Class v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithObject:v inContext:context];
+            returnvalue = v;
         } break;
         case ':': {
             SEL v;
             [invocation getReturnValue:&v];
-            returnvalue = [JSValue valueWithObject:NSStringFromSelector(v) inContext:context];
+            returnvalue = NSStringFromSelector(v);
         } break;
         case '{': {
             char * v;
@@ -357,30 +353,46 @@ static JSValue * processReturn(NSInvocation *invocation,const char * returntype,
                     }
                 }
 #endif
+                void * v=malloc(returnlength);
+                [invocation getReturnValue:v];
+                returnvalue=[NSValue valueWithBytes:v objCType:v];
+                free(v);
                 NSCParameterAssert(0);
             }
         } break;
         case '*': {
+            //char *
             const char * v;
             [invocation getReturnValue:&v];
             NSCParameterAssert(0);
         } break;
         case '^': {
             //c point
+            void * v;
+            [invocation getReturnValue:&v];
+            returnvalue=[NSValue valueWithPointer:v];
             NSCParameterAssert(0);
         }break;
         case '[': {
             //c array
+            void * v=malloc(returnlength);
+            [invocation getReturnValue:v];
+            returnvalue=[NSData dataWithBytes:v length:returnlength];
+            free(v);
             NSCParameterAssert(0);
         } break;
         case '(': {
             //c union
+            void * v=malloc(returnlength);
+            [invocation getReturnValue:v];
+            returnvalue=[NSData dataWithBytes:v length:returnlength];
+            free(v);
             NSCParameterAssert(0);
         } break;
         case '@': {
             void * v;
             [invocation getReturnValue:&v];
-            returnvalue=[JSValue valueWithObject:(__bridge id)v inContext:context];
+            returnvalue=(__bridge id)v;
         }
     }
     return returnvalue;
@@ -388,8 +400,8 @@ static JSValue * processReturn(NSInvocation *invocation,const char * returntype,
 
 @protocol  FURuntimeJSExport <JSExport>
 
-JSExportAs(__call__, - (JSValue*)callWithValue:(JSValue*)value withSelectorname:(NSString*)selectorname withArguments:(NSArray*)arguments);
-JSExportAs(__property__, - (JSValue*)propertyOfValue:(JSValue*)value byPropertyname:(NSString*)propertyname);
+JSExportAs(__call__, - (JSValue*)callWithValue:(id)value withSelectorname:(NSString*)selectorname withArguments:(NSArray*)arguments);
+JSExportAs(__property__, - (JSValue*)propertyOfValue:(id)value byPropertyname:(NSString*)propertyname);
 
 @end
 
@@ -411,7 +423,7 @@ JSExportAs(__property__, - (JSValue*)propertyOfValue:(JSValue*)value byPropertyn
 }
 
 
-- (JSValue*)callWithValue:(JSValue*)value withSelectorname:(NSString*)selectorname withArguments:(NSArray*)arguments{
+- (id)callWithValue:(id)value withSelectorname:(NSString*)selectorname withArguments:(NSArray*)arguments{
     selectorname=[selectorname stringByReplacingOccurrencesOfString:@"&" withString:@":"];
     id target;
     NSMethodSignature *signature;
@@ -419,16 +431,16 @@ JSExportAs(__property__, - (JSValue*)propertyOfValue:(JSValue*)value byPropertyn
     if ([selectorname hasPrefix:@"alloc"]){
         return value;
     }else if([selectorname hasPrefix:@"init"]){
-        Class cls=[value toObject];
+        Class cls=value;
         target = [cls alloc];
         void * voidTarget = (__bridge void *)target;
         target = (__bridge_transfer id)voidTarget;
         signature = [cls instanceMethodSignatureForSelector:selector];
     }else{
-        target = [value toObject];
+        target = value;
         signature=[target methodSignatureForSelector:selector];
     }
-    if (!target||!signature||!selector) return [JSValue valueWithNullInContext:self.context];
+    if (!target||!signature||!selector) return nil;
     NSInvocation *invocation=[NSInvocation invocationWithMethodSignature:signature];
     invocation.target=target;
     invocation.selector=selector;
@@ -438,20 +450,21 @@ JSExportAs(__property__, - (JSValue*)propertyOfValue:(JSValue*)value byPropertyn
         id argumentvalue = [arguments objectAtIndex:i-2];
         if(!processArgument(invocation, argumentvalue, argumenttype, i)){
             NSParameterAssert(0);
-            return [JSValue valueWithNullInContext:self.context];
+            return nil;
         }
     }
+    NSUInteger returnlength=signature.methodReturnLength;
     const char * returntype=signature.methodReturnType;
     [invocation invoke];
-    return processReturn(invocation, returntype,self.context);
+    return processReturn(invocation, returntype,returnlength,self.context);
 }
 
-- (JSValue*)propertyOfValue:(JSValue*)value byPropertyname:(NSString*)propertyname{
-    if (propertyname.length==0) return [JSValue valueWithNullInContext:self.context];
+- (id)propertyOfValue:(id)value byPropertyname:(NSString*)propertyname{
+    if (propertyname.length==0) return nil;
     NSString *classname=propertyname;
     Class cls=NSClassFromString(classname);
-    if (cls)return [JSValue valueWithObject:cls inContext:self.context];
-    return [JSValue valueWithNullInContext:self.context];
+    if (cls)return cls;
+    return nil;
 }
 
 @end

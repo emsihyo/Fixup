@@ -19,7 +19,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSError *error;
-    [FUJSContext.shared evaluateScript:@"var b = NSString.alloc().initWithString&('bca');var c = b + 'haha'; if(typeof b==='string'){ console.log(b) }" withSourceURL:nil error:&error];
+//    [FUJSContext.shared evaluateScript:@"var b = 'cc';var c =Ċạḷḷ('b').();" withSourceURL:nil error:&error];
+    
+//    [FUJSContext.shared evaluateScript:@"var s = ċȧŀŀ('NSString').ċȧŀŀ('alloc')().ċȧŀŀ('initWithString&')('hello');var ss = ċȧŀŀ('s').ċȧŀŀ('stringByAppendingString&')(' world');" replaceable:NO withSourceURL:nil error:&error];
+    [FUJSContext.shared evaluateScript:@"var s = ċȧŀŀ('NSString').ċȧŀŀ('alloc')().ċȧŀŀ('initWithString&')('hello');console.log(s);var ss = ċȧŀŀ('s').ċȧŀŀ('stringByAppendingString&')(' world');" replaceable:NO withSourceURL:nil error:&error];
+
     if (error){
         NSLog(@"%@",error.localizedDescription);
     }
