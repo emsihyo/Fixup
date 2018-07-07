@@ -400,8 +400,8 @@ static id processReturn(NSInvocation *invocation,const char * returntype,NSUInte
 
 @protocol  FURuntimeJSExport <JSExport>
 
-JSExportAs(__call__, - (JSValue*)callWithValue:(id)value withSelectorname:(NSString*)selectorname withArguments:(NSArray*)arguments);
-JSExportAs(__property__, - (JSValue*)propertyOfValue:(id)value byPropertyname:(NSString*)propertyname);
+JSExportAs(call, - (id)callWithValue:(id)value withSelectorname:(NSString*)selectorname withArguments:(NSArray*)arguments);
+JSExportAs(property, - (id)propertyOfValue:(id)value byPropertyname:(NSString*)propertyname);
 
 @end
 

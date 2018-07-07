@@ -1,22 +1,15 @@
-//ᐧ
 (function(){
-    Object.defineProperty(Object.prototype, 'ċȧŀŀ', {value: function(){
-        //property name or method name
-        var name = arguments[0];
-        console.log('property js '+'name: '+name);
-    if (this[name]) return this[name];
+    Object.defineProperty(Object.prototype, '$', {value: function(name){
     //get property value outside virtual machine
-        console.log('property oc '+'name: '+name);
-    var property = $.__property__(this,name);
-    if (property!=null && typeof(property)!='undefined') return property;
-        console.log('function '+'name: '+name);
+    var property = ṆẠṬỊṾẸ.property(this,name);
+    if (property!=null && typeof(property)!='undefined') {
+        console.log('did get property:' + property +' in '+this+' by name: '+name);
+        return property;
+    }
     //call method outside virtual machine
     var target = this;
-    console.log('this: '+typeof this+' '+this);
     return function(){
-        var ret = $.__call__(target,name,Array.prototype.slice.call(arguments));
-        console.log('ret: '+ret);
-        return ret;
+        return ṆẠṬỊṾẸ.call(target,name,Array.prototype.slice.call(arguments));
     };
    }});
 })()

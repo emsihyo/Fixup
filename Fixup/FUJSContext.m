@@ -96,7 +96,7 @@
 //                }\
 //    }})\
 //     })()" replaceable:NO withSourceURL:nil error:nil];
-    self[@"$"]=[[FURuntime alloc]initWithContext:self];
+    self[@"ṆẠṬỊṾẸ"]=[[FURuntime alloc]initWithContext:self];
     self[@"console"]=[[FUConsole alloc]init];
     NSURL *sourceURL=[[[NSBundle bundleForClass:self.class] URLForResource:@"main" withExtension:@"js"] URLByDeletingLastPathComponent];
     NSString *script=[NSString stringWithContentsOfURL:[[NSBundle bundleForClass:self.class] URLForResource:@"main" withExtension:@"js"] encoding:NSUTF8StringEncoding error:nil];

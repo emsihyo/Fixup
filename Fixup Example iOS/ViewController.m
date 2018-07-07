@@ -22,7 +22,10 @@
 //    [FUJSContext.shared evaluateScript:@"var b = 'cc';var c =Ċạḷḷ('b').();" withSourceURL:nil error:&error];
     
 //    [FUJSContext.shared evaluateScript:@"var s = ċȧŀŀ('NSString').ċȧŀŀ('alloc')().ċȧŀŀ('initWithString&')('hello');var ss = ċȧŀŀ('s').ċȧŀŀ('stringByAppendingString&')(' world');" replaceable:NO withSourceURL:nil error:&error];
-    [FUJSContext.shared evaluateScript:@"var s = ċȧŀŀ('NSString').ċȧŀŀ('alloc')().ċȧŀŀ('initWithString&')('hello');console.log(s);var ss = ċȧŀŀ('s').ċȧŀŀ('stringByAppendingString&')(' world');" replaceable:NO withSourceURL:nil error:&error];
+//    [FUJSContext.shared evaluateScript:@"var s = $('NSString').$('alloc')().$('initWithString&')('hello');s = s+' world';console.log(s);s = s.$('stringByAppendingString&')(' every one.');console.log(s);" replaceable:NO withSourceURL:nil error:&error];
+    
+    [FUJSContext.shared evaluateScript:@"var s = 'hello world';console.log(s);s = s.$('stringByAppendingString&')(' every one.');console.log(s);" replaceable:NO withSourceURL:nil error:&error];
+
 
     if (error){
         NSLog(@"%@",error.localizedDescription);
